@@ -1,15 +1,13 @@
 package com.example.todoapp.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
+import com.example.todoapp.models.Task
 import com.example.todoapp.utilities.CreateTaskDialog
 import com.example.todoapp.viewmodels.TaskViewModel
-
-//import com.example.todoapp.models
-
 
 class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInterface {
     private lateinit var binding: ActivityMainBinding
@@ -35,13 +33,15 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
         }
     }
 
-    override fun addTask(title: String, task: String, date: String) {
+    override fun addTask(title: String, description: String, date: String) {
         val dialog = CreateTaskDialog()
         dialog.show(supportFragmentManager, "Add task")
+        val task = Task(title, description, date)
+        viewModel.add(task)
         //TODO: not implemented yet
     }
 
-    private fun showPopup(v: View) {
+    private fun showPopup(view: View) {
         //TODO: not implemented yet
     }
 }
