@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.utilities.TasksAdapter
 import com.example.todoapp.databinding.TasksFragmentBinding
@@ -31,9 +32,16 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        //TODO: not implemented
-        return super.onCreateView(inflater, container, savedInstanceState)
+    ): View {
+        layoutManager = LinearLayoutManager(activityContext, )
+        binding = TasksFragmentBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[TaskViewModel::class.java]
+        tasksAdapter = TasksAdapter(viewModel.getAll())
+        binding.apply {
+            rvTasks.adapter = tasksAdapter
+            rvTasks.layoutManager = layoutManager
+        }
+        return binding.root
     }
 
 }
