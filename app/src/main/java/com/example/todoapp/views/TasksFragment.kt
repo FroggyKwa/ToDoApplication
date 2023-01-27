@@ -15,6 +15,7 @@ import com.example.todoapp.databinding.TasksFragmentBinding
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TasksAdapter
 import com.example.todoapp.viewmodels.TasksViewModel
+import com.google.android.material.divider.MaterialDividerItemDecoration
 
 
 class TasksFragment : Fragment() {
@@ -48,6 +49,10 @@ class TasksFragment : Fragment() {
         binding.apply {
             rvTasks.adapter = tasksAdapter
             rvTasks.layoutManager = layoutManager
+            rvTasks.addItemDecoration(MaterialDividerItemDecoration(
+                activityContext,
+                LinearLayoutManager.VERTICAL
+            ))
         }
         return binding.root
     }
