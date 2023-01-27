@@ -3,6 +3,7 @@ package com.example.todoapp.views
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.models.Task
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[TaskViewModel::class.java]
 
         tasksFragment = TasksFragment()
         supportFragmentManager.beginTransaction().apply {
@@ -34,8 +36,6 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
     }
 
     override fun addTask(title: String, description: String, date: String) {
-        val dialog = CreateTaskDialog()
-        dialog.show(supportFragmentManager, "Add task")
         val task = Task(title, description, date)
         viewModel.add(task)
         //TODO: not implemented yet

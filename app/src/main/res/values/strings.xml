@@ -7,4 +7,6 @@
     <string name="the_task">The task</string>
     <string name="date_s_not_chosen">Date is not chosen</string>
     <string name="set_date">Set date</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 </resources>
