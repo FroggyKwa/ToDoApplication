@@ -2,38 +2,32 @@ package com.example.todoapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.todoapp.models.Task
+import androidx.lifecycle.viewModelScope
+import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.tasks.database.Repository
+import kotlinx.coroutines.launch
 
-class TasksViewModel(application: Application) : AndroidViewModel(application) {
+class TasksViewModel(application: Application, private val repository: Repository) :
+    AndroidViewModel(application) {
     fun add(task: Task) {
-        //TODO: not implemented
+        viewModelScope.launch {
+            repository.add(task)
+        }
     }
 
     fun delete(task: Task) {
-        //TODO: not implemented
+        viewModelScope.launch {
+            repository.delete(task)
+        }
     }
 
     fun update(task: Task) {
-        //TODO: not implemented
+        viewModelScope.launch {
+            repository.update(task)
+        }
     }
 
-    fun get(id: Int) {
-        //TODO: not implemented
-    }
+    fun get(id: Int) = repository.getById(id)
 
-    fun getAll(): List<Task> {
-        return listOf(
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-            Task("Testing data123", "Description of this task", "20.10.23"),
-        )
-        //TODO: not implemented
-    }
+    fun getAll() = repository.getAllTasks()
 }

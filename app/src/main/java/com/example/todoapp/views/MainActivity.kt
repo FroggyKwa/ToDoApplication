@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
-import com.example.todoapp.models.Task
+import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.tasks.database.DB
+import com.example.todoapp.models.tasks.database.Repository
 import com.example.todoapp.utilities.CreateTaskDialog
 import com.example.todoapp.viewmodels.TasksViewModel
+import com.example.todoapp.viewmodels.TasksViewModelFactory
 
 class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInterface {
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +22,10 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[TasksViewModel::class.java]
+        val db = DB.getInstance(this@MainActivity)
+        val repository = Repository(db)
+        val factory = TasksViewModelFactory(application, repository)
+        viewModel = ViewModelProvider(this, factory)[TasksViewModel::class.java]
 
         tasksFragment = TasksFragment()
         supportFragmentManager.beginTransaction().apply {

@@ -9,12 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.databinding.TasksFragmentBinding
+import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.tasks.database.DB
+import com.example.todoapp.models.tasks.database.Repository
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TasksAdapter
 import com.example.todoapp.viewmodels.TasksViewModel
+import com.example.todoapp.viewmodels.TasksViewModelFactory
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 
@@ -40,11 +45,21 @@ class TasksFragment : Fragment() {
     ): View {
         layoutManager = LinearLayoutManager(activityContext)
         binding = TasksFragmentBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[TasksViewModel::class.java]
-        tasksAdapter = TasksAdapter(viewModel.getAll())
+        val database = DB.getInstance(activityContext)
+        val repository = Repository(database)
+        val viewModelFactory = TasksViewModelFactory(application, repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
+
+        tasksAdapter = TasksAdapter(viewModel.getAll().value?.reversed() ?: listOf())
 
         val swipeGesture = SwipeGesture(viewModel, tasksAdapter, activityContext)
         swipeGesture.attachToRecyclerView(binding.rvTasks)
+
+        val observer = Observer<List<Task>> {
+            tasksAdapter.tasks = it.reversed()
+            tasksAdapter.notifyDataSetChanged()
+        }
+        viewModel.getAll().observe(viewLifecycleOwner, observer)
 
         binding.apply {
             rvTasks.adapter = tasksAdapter

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.TaskItemBinding
-import com.example.todoapp.models.Task
+import com.example.todoapp.models.tasks.Task
 
 class TasksAdapter(var tasks: List<Task>) :
     RecyclerView.Adapter<TasksAdapter.TasksListViewHolder>() {
@@ -22,7 +22,7 @@ class TasksAdapter(var tasks: List<Task>) :
         holder.binding.apply {
             tvTaskTitle.text = tasks[position].title
             tvTaskDescription.text = tasks[position].description
-            cbCompleted.isChecked = tasks[position].completed
+            cbCompleted.isChecked = tasks[position].isCompleted
         }
     }
 
