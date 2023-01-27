@@ -8,18 +8,18 @@ import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.models.Task
 import com.example.todoapp.utilities.CreateTaskDialog
-import com.example.todoapp.viewmodels.TaskViewModel
+import com.example.todoapp.viewmodels.TasksViewModel
 
 class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInterface {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: TaskViewModel
+    private lateinit var viewModel: TasksViewModel
     private lateinit var tasksFragment: TasksFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this)[TaskViewModel::class.java]
+        viewModel = ViewModelProvider(this)[TasksViewModel::class.java]
 
         tasksFragment = TasksFragment()
         supportFragmentManager.beginTransaction().apply {
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
     override fun addTask(title: String, description: String, date: String) {
         val task = Task(title, description, date)
         viewModel.add(task)
-        //TODO: not implemented yet
     }
 
     private fun showPopup(view: View) {

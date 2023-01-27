@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.example.todoapp.models.Task
 
-class TaskViewModel(application: Application) : AndroidViewModel(application) {
+class TasksViewModel(application: Application) : AndroidViewModel(application) {
     fun add(task: Task) {
         //TODO: not implemented
     }
