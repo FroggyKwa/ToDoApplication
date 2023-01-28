@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.constraintlayout.widget.Group
 import com.example.todoapp.R
 import com.example.todoapp.databinding.CreateTaskDialogBinding
 import java.text.DateFormat
@@ -47,7 +49,7 @@ class CreateTaskDialog : AppCompatDialogFragment() {
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = !s.isNullOrEmpty()
             }
         })
-        binding.btnSetDate.setOnClickListener {
+        binding.group.setAllOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -83,6 +85,12 @@ class CreateTaskDialog : AppCompatDialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         dialogInterface = context as CreateTaskDialogInterface
+    }
+
+    fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+        referencedIds.forEach { id ->
+            rootView.findViewById<View>(id).setOnClickListener(listener)
+        }
     }
 
     interface CreateTaskDialogInterface {
