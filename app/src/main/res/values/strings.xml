@@ -9,4 +9,15 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="task_description">Task description</string>
+    <string name="go_back">Back</string>
+    <string name="delete">Delete</string>
+    <string name="move_to_important">Make the task important</string>
+    <string name="add_subtask">Add subtask</string>
+    <string name="mark_completed">Mark completed</string>
+    <string name="new_subtask">New subtask</string>
+    <string name="save">Save</string>
+    <string name="mark_incompleted">Mark incompleted</string>
+    <string name="task_updated">Task has been updated</string>
+    <string name="undo">Undo</string>
+    <string name="task_deleted">Task has been deleted</string>
 </resources>

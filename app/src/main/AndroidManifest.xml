@@ -28,6 +28,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".views.EditTaskActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            >
+        </activity>
     </application>
 
 </manifest>

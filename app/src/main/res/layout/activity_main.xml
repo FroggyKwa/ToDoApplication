@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:name="com.example.todoapp.views.TasksFragment"
-        tools:layout="@layout/tasks" />
+        tools:layout="@layout/tasks_fragment" />
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:layout_gravity="bottom"
             app:backgroundTint="@color/primary"
             app:contentInsetStart="0dp"
-            app:fabCradleRoundedCornerRadius="0dp">
+            app:fabCradleRoundedCornerRadius="30dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -74,9 +74,9 @@
             android:id="@+id/fbtnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/add_a_new_task"
             android:outlineAmbientShadowColor="@color/button"
             android:outlineSpotShadowColor="@color/button"
-            android:contentDescription="@string/add_a_new_task"
             android:src="@drawable/ic_baseline_add"
             app:backgroundTint="@color/button"
             app:layout_anchor="@+id/bottomAppBar"

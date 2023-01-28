@@ -1,15 +1,14 @@
 package com.example.todoapp.views
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
-import com.example.todoapp.models.tasks.Task
-import com.example.todoapp.models.tasks.database.DB
-import com.example.todoapp.utilities.Repository
+import com.example.todoapp.models.database.DB
+import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.CreateTaskDialog
+import com.example.todoapp.utilities.Repository
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 
@@ -37,16 +36,11 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
             fbtnAdd.setOnClickListener {
                 CreateTaskDialog().show(supportFragmentManager, "Add task")
             }
-            burgerMenu.setOnClickListener { showPopup(burgerMenu) }
         }
     }
 
     override fun addTask(title: String, description: String, date: String) {
         val task = Task(title, description, date)
         viewModel.add(task)
-    }
-
-    private fun showPopup(view: View) {
-        //TODO: not implemented yet
     }
 }
