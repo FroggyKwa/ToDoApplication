@@ -4,14 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.TaskItemBinding
-import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.viewmodels.TasksViewModel
 
-class TasksAdapter(var tasks: List<Task>, private val viewModel: TasksViewModel) :
+class TasksAdapter(
+    var tasks: List<Task>,
+    private val viewModel: TasksViewModel,
+    val clickListener: (Task) -> Unit
+) :
     RecyclerView.Adapter<TasksAdapter.TasksListViewHolder>() {
 
     inner class TasksListViewHolder(val binding: TaskItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.listItem.setOnClickListener { clickListener(tasks[bindingAdapterPosition]) }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
