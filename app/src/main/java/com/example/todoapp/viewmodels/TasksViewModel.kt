@@ -3,7 +3,7 @@ package com.example.todoapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.Repository
 import kotlinx.coroutines.launch
 
@@ -11,23 +11,23 @@ class TasksViewModel(application: Application, private val repository: Repositor
     AndroidViewModel(application) {
     fun add(task: Task) {
         viewModelScope.launch {
-            repository.add(task)
+            repository.addTask(task)
         }
     }
 
     fun delete(task: Task) {
         viewModelScope.launch {
-            repository.delete(task)
+            repository.deleteTask(task)
         }
     }
 
     fun update(task: Task) {
         viewModelScope.launch {
-            repository.update(task)
+            repository.updateTask(task)
         }
     }
 
-    fun get(id: Int) = repository.getById(id)
+    fun get(id: Int) = repository.getTaskById(id)
 
     fun getAll() = repository.getAllTasks()
 }
