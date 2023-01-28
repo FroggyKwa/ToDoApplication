@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.models.tasks.Task
-import com.example.todoapp.models.tasks.database.Repository
+import com.example.todoapp.utilities.Repository
 import kotlinx.coroutines.launch
 
 class TasksViewModel(application: Application, private val repository: Repository) :

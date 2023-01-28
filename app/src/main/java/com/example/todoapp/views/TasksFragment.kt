@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.databinding.TasksFragmentBinding
 import com.example.todoapp.models.tasks.Task
 import com.example.todoapp.models.tasks.database.DB
-import com.example.todoapp.models.tasks.database.Repository
+import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TasksAdapter
 import com.example.todoapp.viewmodels.TasksViewModel
@@ -50,7 +50,7 @@ class TasksFragment : Fragment() {
         val viewModelFactory = TasksViewModelFactory(application, repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
 
-        tasksAdapter = TasksAdapter(viewModel.getAll().value?.reversed() ?: listOf())
+        tasksAdapter = TasksAdapter(viewModel.getAll().value?.reversed() ?: listOf(), viewModel)
 
         val swipeGesture = SwipeGesture(viewModel, tasksAdapter, activityContext)
         swipeGesture.attachToRecyclerView(binding.rvTasks)
@@ -64,10 +64,12 @@ class TasksFragment : Fragment() {
         binding.apply {
             rvTasks.adapter = tasksAdapter
             rvTasks.layoutManager = layoutManager
-            rvTasks.addItemDecoration(MaterialDividerItemDecoration(
-                activityContext,
-                LinearLayoutManager.VERTICAL
-            ))
+            rvTasks.addItemDecoration(
+                MaterialDividerItemDecoration(
+                    activityContext,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
         }
         return binding.root
     }

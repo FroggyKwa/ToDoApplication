@@ -8,7 +8,7 @@ import com.example.todoapp.R
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.models.tasks.Task
 import com.example.todoapp.models.tasks.database.DB
-import com.example.todoapp.models.tasks.database.Repository
+import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.CreateTaskDialog
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory

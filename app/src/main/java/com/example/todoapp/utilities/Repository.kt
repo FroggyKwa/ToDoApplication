@@ -1,6 +1,7 @@
-package com.example.todoapp.models.tasks.database
+package com.example.todoapp.utilities
 
 import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.tasks.database.DB
 
 class Repository(
     private val db: DB
