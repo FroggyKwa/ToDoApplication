@@ -1,4 +1,4 @@
-package com.example.todoapp.models.tasks
+package com.example.todoapp.models.database.tasks
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,9 +9,9 @@ class Task(
     @ColumnInfo(name = "Title")
     val title: String,
     @ColumnInfo(name = "Description", defaultValue = "")
-    val description: String?,
+    val description: String,
     @ColumnInfo(name = "Date", defaultValue = "")
-    val date: String?,
+    val date: String,
     @ColumnInfo(name = "isCompleted", defaultValue = false.toString())
     val isCompleted: Boolean = false,
     @PrimaryKey(true)

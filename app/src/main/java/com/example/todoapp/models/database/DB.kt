@@ -1,19 +1,24 @@
-package com.example.todoapp.models.tasks.database
+package com.example.todoapp.models.database
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.models.database.subtasks.Subtask
+import com.example.todoapp.models.database.subtasks.SubtaskDao
+import com.example.todoapp.models.database.tasks.Task
+import com.example.todoapp.models.database.tasks.TasksDao
 
 
 @Database(
-    entities = [Task::class],
+    entities = [Task::class, Subtask::class],
     exportSchema = true,
-    version = 1
+    version = 1,
 )
 abstract class DB : RoomDatabase() {
     abstract fun getTasksDao(): TasksDao
+    abstract fun getSubtasksDao(): SubtaskDao
 
     companion object {
         @Volatile
@@ -21,7 +26,7 @@ abstract class DB : RoomDatabase() {
 
         fun getInstance(context: Context): DB {
             synchronized(this) {
-                if (!::instance.isInitialized) {
+                if (!Companion::instance.isInitialized) {
                     instance = createDatabase(context)
                 }
                 return instance
@@ -32,7 +37,7 @@ abstract class DB : RoomDatabase() {
                 context,
                 DB::class.java,
                 "TasksDatabase"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
         }
     }
 }
