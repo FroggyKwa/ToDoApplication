@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.TaskItemBinding
 import com.example.todoapp.models.tasks.Task
+import com.example.todoapp.viewmodels.TasksViewModel
 
-class TasksAdapter(var tasks: List<Task>) :
+class TasksAdapter(var tasks: List<Task>, private val viewModel: TasksViewModel) :
     RecyclerView.Adapter<TasksAdapter.TasksListViewHolder>() {
 
     inner class TasksListViewHolder(val binding: TaskItemBinding) :
@@ -23,6 +24,17 @@ class TasksAdapter(var tasks: List<Task>) :
             tvTaskTitle.text = tasks[position].title
             tvTaskDescription.text = tasks[position].description
             cbCompleted.isChecked = tasks[position].isCompleted
+            cbCompleted.setOnCheckedChangeListener { _, isChecked ->
+                val task = tasks[position]
+                val edited = Task(
+                    task.title,
+                    task.description,
+                    task.date,
+                    isChecked,
+                    task.id
+                )
+                viewModel.update(edited)
+            }
         }
     }
 
