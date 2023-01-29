@@ -18,8 +18,8 @@ import com.example.todoapp.models.database.subtasks.Subtask
 import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SubtasksAdapter
 import com.example.todoapp.utilities.TaskSerializer
-import com.example.todoapp.viewmodels.SubtasksViewModelFactory
 import com.example.todoapp.viewmodels.SubtasksViewModel
+import com.example.todoapp.viewmodels.SubtasksViewModelFactory
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 import java.text.SimpleDateFormat
@@ -70,7 +70,7 @@ class EditTaskActivity : AppCompatActivity() {
             btnTaskCompleted.text = getCompletedButtonText(task.isCompleted)
             btnTaskCompleted.setBackgroundColor(getCompletedButtonColor(task.isCompleted))
 
-            btnBack.setOnClickListener { onBackPressedDispatcher } //todo
+            btnBack.setOnClickListener { finish() }
 
             btnTaskCompleted.setOnClickListener {
                 task.isCompleted = !task.isCompleted
@@ -80,6 +80,8 @@ class EditTaskActivity : AppCompatActivity() {
                 viewModel.update(TaskSerializer.toTaskEntity(task))
             }
             btnDone.setOnClickListener {
+                task.title = etTitleEdit.text.toString()
+                task.description =etDescriptionEdit.text.toString()
                 val intent = Intent().putExtra("Task", task)
                 setResult(7355608, intent)
                 finish()
@@ -88,38 +90,39 @@ class EditTaskActivity : AppCompatActivity() {
                 subtasksViewModel.add(Subtask("", taskID = task.id!!))
             }
 
-                tvDate.setOnClickListener {
-                    val calendar = Calendar.getInstance()
-                    val year = calendar.get(Calendar.YEAR)
-                    val month = calendar.get(Calendar.MONTH)
-                    val day = calendar.get(Calendar.DAY_OF_MONTH)
+            tvDate.setOnClickListener {
+                val calendar = Calendar.getInstance()
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-                    val datePickerDialog = DatePickerDialog(
-                        this@EditTaskActivity,
-                        { _, yearPicked, monthPicked, dayPicked ->
-                            calendar.set(Calendar.YEAR, yearPicked)
-                            calendar.set(Calendar.MONTH, monthPicked)
-                            calendar.set(Calendar.DAY_OF_MONTH, dayPicked)
-                            val formatted =
-                                SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
-                            tvDate.text = formatted
-                        },
-                        year,
-                        month,
-                        day
-                    )
-                    datePickerDialog.show()
+                val datePickerDialog = DatePickerDialog(
+                    this@EditTaskActivity,
+                    { _, yearPicked, monthPicked, dayPicked ->
+                        calendar.set(Calendar.YEAR, yearPicked)
+                        calendar.set(Calendar.MONTH, monthPicked)
+                        calendar.set(Calendar.DAY_OF_MONTH, dayPicked)
+                        val formatted =
+                            SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
+                        tvDate.text = formatted
+                        task.date = formatted
+                    },
+                    year,
+                    month,
+                    day
+                )
+                datePickerDialog.show()
             }
         }
     }
 
     private fun getCompletedButtonText(isCompleted: Boolean): String {
-        return if (isCompleted) resources.getString(R.string.mark_completed)
+        return if (!isCompleted) resources.getString(R.string.mark_completed)
         else resources.getString(R.string.mark_incompleted)
     }
 
     private fun getCompletedButtonColor(isCompleted: Boolean): Int {
-        return if (isCompleted) ContextCompat.getColor(applicationContext, R.color.primary)
+        return if (!isCompleted) ContextCompat.getColor(applicationContext, R.color.primary)
         else ContextCompat.getColor(applicationContext, R.color.delete_color)
     }
 }
