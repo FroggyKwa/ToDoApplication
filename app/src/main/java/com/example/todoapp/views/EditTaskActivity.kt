@@ -79,7 +79,7 @@ class EditTaskActivity : AppCompatActivity() {
                 btnCompleted.setBackgroundColor(getCompletedButtonColor(task.isCompleted))
                 viewModel.update(TaskSerializer.toTaskEntity(task))
             }
-            btnDelete.setOnClickListener {
+            btnDone.setOnClickListener {
                 val intent = Intent().putExtra("Task", task)
                 setResult(7355608, intent)
                 finish()

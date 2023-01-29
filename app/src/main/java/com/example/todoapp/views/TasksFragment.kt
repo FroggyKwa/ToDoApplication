@@ -113,11 +113,6 @@ class TasksFragment : Fragment() {
                     val data: Intent = result.data ?: return@registerForActivityResult
                     val task = TaskSerializer.toTaskEntity(data.getSerializableExtra("Task") as TaskSerializer)
                     viewModel.update(task)
-                    Snackbar.make(binding.root, R.string.task_updated, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.undo) {
-                            viewModel.add(task)
-                        }
-                        .show()
                 }
 
             }
