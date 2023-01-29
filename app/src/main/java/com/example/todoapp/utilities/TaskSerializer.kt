@@ -7,6 +7,7 @@ class TaskSerializer(
     var title: String,
     var description: String,
     var isCompleted: Boolean,
+    var isImportant: Boolean,
     var date: String,
     val id: Int? = null
 ) : Serializable {
@@ -17,6 +18,7 @@ class TaskSerializer(
                 data.description,
                 data.date,
                 data.isCompleted,
+                data.isImportant,
                 data.id
             )
         }
@@ -26,6 +28,7 @@ class TaskSerializer(
                 data.title,
                 data.description,
                 data.isCompleted,
+                data.isImportant,
                 data.date,
                 data.id
             )

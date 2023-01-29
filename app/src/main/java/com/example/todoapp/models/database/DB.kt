@@ -14,7 +14,7 @@ import com.example.todoapp.models.database.tasks.TasksDao
 @Database(
     entities = [Task::class, Subtask::class],
     exportSchema = true,
-    version = 1,
+    version = 2,
 )
 abstract class DB : RoomDatabase() {
     abstract fun getTasksDao(): TasksDao

@@ -55,7 +55,7 @@ class SubtasksAdapter(
             cbCompletedSub.setOnCheckedChangeListener(null)
             cbCompletedSub.isChecked = false
             cbCompletedSub.setOnClickListener {
-                viewModel.delete(subtasks[holder.adapterPosition])
+                viewModel.delete(subtasks[holder.bindingAdapterPosition])
             }
         }
     }

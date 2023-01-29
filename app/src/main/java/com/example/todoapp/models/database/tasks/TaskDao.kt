@@ -11,16 +11,19 @@ interface TasksDao {
     @Query("SELECT * FROM Tasks WHERE isCompleted = 1")
     fun getAllCompleted(): LiveData<List<Task>>
 
+    @Query("SELECT * FROM Tasks WHERE isImportant = 1")
+    fun getAllImportant(): LiveData<List<Task>>
+
     @Query("SELECT * FROM Tasks WHERE id = :id")
     fun get(id: Int): LiveData<Task>
 
     @Delete
-    abstract suspend fun delete(task: Task)
+    suspend fun delete(task: Task)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insert(task: Task)
+    suspend fun insert(task: Task)
 
     @Update
-    abstract suspend fun update(task: Task)
+    suspend fun update(task: Task)
 
 }

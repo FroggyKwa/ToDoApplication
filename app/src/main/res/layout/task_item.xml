@@ -45,13 +45,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="50dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cbCompleted"
             app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
+        <ImageButton
+            android:id="@+id/btnImportant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/move_to_important"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_star_border_24"
+            android:layout_marginEnd="50dp"
+            app:layout_constraintStart_toEndOf="@+id/tvTaskDescription"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

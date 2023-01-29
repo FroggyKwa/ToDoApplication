@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/delete"
+        android:contentDescription="@string/done"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_baseline_check_24"
@@ -37,14 +37,13 @@
         android:id="@+id/btnImportant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="?android:attr/selectableItemBackground"
         android:contentDescription="@string/move_to_important"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_baseline_star_border_24"
         app:layout_constraintEnd_toStartOf="@+id/btnDone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etTitleEdit"

@@ -2,6 +2,7 @@ package com.example.todoapp.utilities
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.TaskItemBinding
 import com.example.todoapp.models.database.tasks.Task
@@ -13,6 +14,7 @@ class TasksAdapter(
     val clickListener: (Task) -> Unit
 ) :
     RecyclerView.Adapter<TasksAdapter.TasksListViewHolder>() {
+    private lateinit var res: GetResources
 
     inner class TasksListViewHolder(val binding: TaskItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -24,24 +26,33 @@ class TasksAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = TaskItemBinding.inflate(layoutInflater, parent, false)
+        res = GetResources(parent.context)
         return TasksListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TasksListViewHolder, position: Int) {
+        val task = tasks[position]
         holder.binding.apply {
             tvTaskTitle.text = tasks[position].title
             tvTaskDescription.text = tasks[position].description
             cbCompleted.isChecked = tasks[position].isCompleted
             cbCompleted.setOnCheckedChangeListener { _, isChecked ->
-                val task = tasks[position]
                 val edited = Task(
                     task.title,
                     task.description,
                     task.date,
                     isChecked,
+                    task.isImportant,
                     task.id
                 )
                 viewModel.update(edited)
+            }
+            btnImportant.setImageResource(res.getImportantButtonIcon(task.isImportant))
+            btnImportant.setOnClickListener {
+                task.isImportant = !task.isImportant
+                val btnImportant = it as ImageButton
+                btnImportant.setImageResource(res.getImportantButtonIcon(task.isImportant))
+                viewModel.update(task)
             }
         }
     }

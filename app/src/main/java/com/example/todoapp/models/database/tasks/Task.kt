@@ -14,6 +14,9 @@ class Task(
     val date: String,
     @ColumnInfo(name = "isCompleted", defaultValue = false.toString())
     val isCompleted: Boolean = false,
+    @ColumnInfo(name = "isImportant", defaultValue = false.toString())
+    var isImportant: Boolean = false,
+
     @PrimaryKey(true)
     val id: Int? = null
 

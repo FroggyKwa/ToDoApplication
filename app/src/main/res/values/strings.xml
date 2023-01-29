@@ -20,4 +20,5 @@
     <string name="task_updated">Task has been updated</string>
     <string name="undo">Undo</string>
     <string name="task_deleted">Task has been deleted</string>
+    <string name="done">Done</string>
 </resources>

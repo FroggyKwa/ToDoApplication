@@ -10,4 +10,5 @@
     <color name="primary">#77BA7A</color>
     <color name="button">#4BA34F</color>
     <color name="delete_color">#EF5350</color>
+    <color name="important">#E7B351</color>
 </resources>
