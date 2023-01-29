@@ -1,7 +1,12 @@
 package com.example.todoapp.utilities
 
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.SubtaskItemBinding
 import com.example.todoapp.models.database.subtasks.Subtask
@@ -35,12 +40,22 @@ class SubtasksAdapter(
                     )
                 )
             }
-            cbCompletedSub.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    val subtask = subtasks[holder.bindingAdapterPosition]
-                    subtask.isCompleted = cbCompletedSub.isChecked
-                    viewModel.update(subtask)
+            tvSubtaskTitle.setOnFocusChangeListener { view, hasFocus ->
+                fun Context.hideKeyboard(view: View) {
+                    val inputMethodManager =
+                        getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
                 }
+
+                btnSave.isVisible = hasFocus
+                if (!hasFocus)
+                    view.context.hideKeyboard(view)
+
+            }
+            cbCompletedSub.setOnCheckedChangeListener(null)
+            cbCompletedSub.isChecked = false
+            cbCompletedSub.setOnClickListener {
+                viewModel.delete(subtasks[holder.adapterPosition])
             }
         }
     }

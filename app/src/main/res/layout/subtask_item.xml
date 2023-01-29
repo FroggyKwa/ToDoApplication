@@ -27,13 +27,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSave"
+        android:backgroundTint="@color/primary"
+        app:cornerRadius="15dp"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/button_background"
+        android:textColor="@color/white"
         android:text="@string/save"
         android:textAllCaps="false"
         app:backgroundTint="@null"
@@ -49,7 +52,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:buttonTint="@color/button"
+        android:buttonTint="@color/primary"
         android:minWidth="48dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
