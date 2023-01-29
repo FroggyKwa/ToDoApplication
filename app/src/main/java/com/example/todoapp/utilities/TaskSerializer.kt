@@ -4,10 +4,10 @@ import com.example.todoapp.models.database.tasks.Task
 import java.io.Serializable
 
 class TaskSerializer(
-    val title: String,
-    val description: String,
+    var title: String,
+    var description: String,
     var isCompleted: Boolean,
-    val date: String,
+    var date: String,
     val id: Int? = null
 ) : Serializable {
     companion object {
