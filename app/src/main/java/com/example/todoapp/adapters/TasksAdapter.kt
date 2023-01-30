@@ -1,4 +1,4 @@
-package com.example.todoapp.utilities
+package com.example.todoapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.TaskItemBinding
 import com.example.todoapp.models.database.tasks.Task
+import com.example.todoapp.utilities.GetResources
 import com.example.todoapp.viewmodels.TasksViewModel
 
 class TasksAdapter(

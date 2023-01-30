@@ -21,7 +21,8 @@ import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TaskSerializer
-import com.example.todoapp.utilities.TasksAdapter
+import com.example.todoapp.adapters.TasksAdapter
+import com.example.todoapp.utilities.TaskUtils.openEditTaskActivity
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 
@@ -48,7 +49,7 @@ class ImportantTasksFragment : Fragment() {
 
         adapter =
             TasksAdapter(viewModel.getAllImportant().value?.reversed() ?: listOf(), viewModel) {
-                openEditTaskActivity(it)
+                openEditTaskActivity(it, requireContext(), resultLauncher)
             }
         layoutManager = LinearLayoutManager(activityContext)
         val tasksObserver = Observer<List<Task>> {
@@ -80,13 +81,6 @@ class ImportantTasksFragment : Fragment() {
                 val task = TaskSerializer.toTaskEntity(data.getSerializableExtra("Task") as TaskSerializer)
                 viewModel.update(task)
             }
-        }
-    }
-
-    private fun openEditTaskActivity(task: Task) {
-        Intent(requireActivity(), EditTaskActivity::class.java).also { intent ->
-            intent.putExtra("Task", TaskSerializer.fromTaskEntity(task))
-            resultLauncher.launch(intent)
         }
     }
 }

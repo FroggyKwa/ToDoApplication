@@ -1,4 +1,4 @@
-package com.example.todoapp.utilities
+package com.example.todoapp.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

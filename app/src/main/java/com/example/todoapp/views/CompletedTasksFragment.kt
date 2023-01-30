@@ -7,26 +7,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.PopupMenu
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.todoapp.R
 import com.example.todoapp.databinding.ImportantTasksFragmentBinding
 import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.TaskSerializer
 import com.example.todoapp.models.database.DB
 import com.example.todoapp.utilities.Repository
-import com.example.todoapp.utilities.Consts
 import com.example.todoapp.utilities.SwipeGesture
-import com.example.todoapp.utilities.TasksAdapter
+import com.example.todoapp.adapters.TasksAdapter
+import com.example.todoapp.utilities.TaskUtils
+import com.example.todoapp.utilities.TaskUtils.openEditTaskActivity
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 
@@ -53,7 +50,7 @@ class CompletedTasksFragment : Fragment() {
 
         adapter =
             TasksAdapter(viewModel.getAllCompleted().value?.reversed() ?: listOf(), viewModel) {
-                openEditTaskActivity(it)
+                openEditTaskActivity(it, requireContext(), resultLauncher)
             }
         layoutManager = LinearLayoutManager(activityContext)
         val tasksObserver = Observer<List<Task>> {
@@ -87,12 +84,4 @@ class CompletedTasksFragment : Fragment() {
             }
         }
     }
-
-    private fun openEditTaskActivity(task: Task) {
-        Intent(requireActivity(), EditTaskActivity::class.java).also { intent ->
-            intent.putExtra("Task", TaskSerializer.fromTaskEntity(task))
-            resultLauncher.launch(intent)
-        }
-    }
-
 }

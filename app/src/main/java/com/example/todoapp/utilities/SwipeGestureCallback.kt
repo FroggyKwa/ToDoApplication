@@ -6,8 +6,8 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.PrimaryKey
 import com.example.todoapp.R
+import com.example.todoapp.adapters.TasksAdapter
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.google.android.material.snackbar.Snackbar
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator

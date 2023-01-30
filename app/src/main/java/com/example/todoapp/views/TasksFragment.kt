@@ -23,7 +23,9 @@ import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TaskSerializer
-import com.example.todoapp.utilities.TasksAdapter
+import com.example.todoapp.adapters.TasksAdapter
+import com.example.todoapp.utilities.TaskUtils
+import com.example.todoapp.utilities.TaskUtils.openEditTaskActivity
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -44,13 +46,6 @@ class TasksFragment : Fragment() {
         application = (context as Activity).application
     }
 
-    private fun openEditTaskActivity(task: Task) {
-        Intent(requireActivity(), EditTaskActivity::class.java).also { intent ->
-            intent.putExtra("Task", TaskSerializer.fromTaskEntity(task))
-            resultLauncher.launch(intent)
-        }
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +63,7 @@ class TasksFragment : Fragment() {
             viewModel.getAll().value?.reversed() ?: listOf(),
             viewModel
         ) {
-            openEditTaskActivity(it)
+            openEditTaskActivity(it, requireContext(), resultLauncher)
         }
         val swipeGesture = SwipeGesture(viewModel, tasksAdapter, activityContext, binding.root)
         swipeGesture.attachToRecyclerView(binding.rvTasks)
@@ -95,7 +90,7 @@ class TasksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.findViewById<ImageButton>(R.id.moreOptions)?.setOnClickListener {
-            showPopup(it)
+
         }
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -108,10 +103,6 @@ class TasksFragment : Fragment() {
 
             }
 
-    }
-
-    private fun showPopup(view: View) {
-        //TODO: not implemented yet
     }
 
 }

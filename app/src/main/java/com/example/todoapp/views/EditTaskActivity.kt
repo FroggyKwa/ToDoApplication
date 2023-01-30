@@ -16,7 +16,7 @@ import com.example.todoapp.models.database.DB
 import com.example.todoapp.models.database.subtasks.Subtask
 import com.example.todoapp.utilities.GetResources
 import com.example.todoapp.utilities.Repository
-import com.example.todoapp.utilities.SubtasksAdapter
+import com.example.todoapp.adapters.SubtasksAdapter
 import com.example.todoapp.utilities.TaskSerializer
 import com.example.todoapp.viewmodels.SubtasksViewModel
 import com.example.todoapp.viewmodels.SubtasksViewModelFactory

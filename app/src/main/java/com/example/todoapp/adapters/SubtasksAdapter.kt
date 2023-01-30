@@ -1,4 +1,4 @@
-package com.example.todoapp.utilities
+package com.example.todoapp.adapters
 
 import android.app.Activity
 import android.content.Context

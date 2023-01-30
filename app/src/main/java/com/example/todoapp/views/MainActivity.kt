@@ -7,10 +7,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.models.database.DB
 import com.example.todoapp.models.database.tasks.Task
-import com.example.todoapp.utilities.Consts.TAB_NAMES
+import com.example.todoapp.utilities.TaskUtils.TAB_NAMES
 import com.example.todoapp.utilities.CreateTaskDialog
 import com.example.todoapp.utilities.Repository
-import com.example.todoapp.utilities.PagerAdapter
+import com.example.todoapp.adapters.PagerAdapter
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 import com.google.android.material.tabs.TabLayout
