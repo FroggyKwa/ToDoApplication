@@ -21,4 +21,7 @@
     <string name="undo">Undo</string>
     <string name="task_deleted">Task has been deleted</string>
     <string name="done">Done</string>
+    <string name="sort_alphabetically">Sort alphabetically</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="sort_by_importance">Sort by importance</string>
 </resources>

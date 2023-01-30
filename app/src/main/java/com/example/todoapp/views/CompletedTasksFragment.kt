@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todoapp.R
 import com.example.todoapp.databinding.ImportantTasksFragmentBinding
 import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.TaskSerializer
@@ -29,7 +31,7 @@ import com.example.todoapp.viewmodels.TasksViewModelFactory
 
 class CompletedTasksFragment : Fragment() {
     private lateinit var binding: ImportantTasksFragmentBinding
-    private lateinit var adapter: TasksAdapter
+    private lateinit var tasksAdapter: TasksAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var viewModel: TasksViewModel
     private lateinit var activityContext: Context
@@ -48,21 +50,21 @@ class CompletedTasksFragment : Fragment() {
         val viewModelFactory = TasksViewModelFactory(application, repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
 
-        adapter =
+        tasksAdapter =
             TasksAdapter(viewModel.getAllCompleted().value?.reversed() ?: listOf(), viewModel) {
                 openEditTaskActivity(it, requireContext(), resultLauncher)
             }
         layoutManager = LinearLayoutManager(activityContext)
         val tasksObserver = Observer<List<Task>> {
-            adapter.tasks = it.reversed()
-            adapter.notifyDataSetChanged()
+            tasksAdapter.tasks = it.reversed()
+            tasksAdapter.notifyDataSetChanged()
         }
         viewModel.getAllCompleted().observe(viewLifecycleOwner, tasksObserver)
 
-        val swipeGesture = SwipeGesture(viewModel, adapter, activityContext, binding.root)
+        val swipeGesture = SwipeGesture(viewModel, tasksAdapter, activityContext, binding.root)
         swipeGesture.attachToRecyclerView(binding.rvTasksImportant)
         binding.apply {
-            rvTasksImportant.adapter = adapter
+            rvTasksImportant.adapter = tasksAdapter
             rvTasksImportant.layoutManager = layoutManager
         }
         return binding.root
@@ -76,6 +78,9 @@ class CompletedTasksFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.findViewById<ImageButton>(R.id.moreOptions)?.setOnClickListener {
+            TaskUtils.showPopup(tasksAdapter, it, activityContext)
+        }
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == 7355608) {
                 val data: Intent = result.data ?: return@registerForActivityResult

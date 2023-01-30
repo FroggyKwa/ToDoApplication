@@ -24,8 +24,8 @@ import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SwipeGesture
 import com.example.todoapp.utilities.TaskSerializer
 import com.example.todoapp.adapters.TasksAdapter
-import com.example.todoapp.utilities.TaskUtils
 import com.example.todoapp.utilities.TaskUtils.openEditTaskActivity
+import com.example.todoapp.utilities.TaskUtils.showPopup
 import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -90,7 +90,7 @@ class TasksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.findViewById<ImageButton>(R.id.moreOptions)?.setOnClickListener {
-
+            showPopup(tasksAdapter, it, activityContext)
         }
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

@@ -45,9 +45,6 @@ class MainActivity : AppCompatActivity(), CreateTaskDialog.CreateTaskDialogInter
             fbtnAdd.setOnClickListener {
                 CreateTaskDialog().show(supportFragmentManager, "Add task")
             }
-            moreOptions.setOnClickListener {
-
-            }
         }
     }
 
