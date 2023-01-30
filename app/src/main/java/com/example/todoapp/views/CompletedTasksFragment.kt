@@ -17,12 +17,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.R
-import com.example.todoapp.databinding.ImportantTasksFragmentBinding
-import com.example.todoapp.models.database.tasks.Task
-import com.example.todoapp.utilities.TaskSerializer
+import com.example.todoapp.databinding.CompletedTasksFragmentBinding
 import com.example.todoapp.models.database.DB
+import com.example.todoapp.models.database.tasks.Task
 import com.example.todoapp.utilities.Repository
 import com.example.todoapp.utilities.SwipeGesture
+import com.example.todoapp.utilities.TaskSerializer
 import com.example.todoapp.adapters.TasksAdapter
 import com.example.todoapp.utilities.TaskUtils
 import com.example.todoapp.utilities.TaskUtils.openEditTaskActivity
@@ -30,7 +30,7 @@ import com.example.todoapp.viewmodels.TasksViewModel
 import com.example.todoapp.viewmodels.TasksViewModelFactory
 
 class CompletedTasksFragment : Fragment() {
-    private lateinit var binding: ImportantTasksFragmentBinding
+    private lateinit var binding: CompletedTasksFragmentBinding
     private lateinit var tasksAdapter: TasksAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var viewModel: TasksViewModel
@@ -44,7 +44,7 @@ class CompletedTasksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ImportantTasksFragmentBinding.inflate(inflater, container, false)
+        binding = CompletedTasksFragmentBinding.inflate(inflater, container, false)
         val database = DB.getInstance(activityContext)
         val repository = Repository(database)
         val viewModelFactory = TasksViewModelFactory(application, repository)
@@ -62,10 +62,10 @@ class CompletedTasksFragment : Fragment() {
         viewModel.getAllCompleted().observe(viewLifecycleOwner, tasksObserver)
 
         val swipeGesture = SwipeGesture(viewModel, tasksAdapter, activityContext, binding.root)
-        swipeGesture.attachToRecyclerView(binding.rvTasksImportant)
+        swipeGesture.attachToRecyclerView(binding.rvTasksCompleted)
         binding.apply {
-            rvTasksImportant.adapter = tasksAdapter
-            rvTasksImportant.layoutManager = layoutManager
+            rvTasksCompleted.adapter = tasksAdapter
+            rvTasksCompleted.layoutManager = layoutManager
         }
         return binding.root
     }

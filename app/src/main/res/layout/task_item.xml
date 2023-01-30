@@ -9,7 +9,6 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/cardview_dark_background"
-    app:cardCornerRadius="10dp"
     app:contentPadding="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

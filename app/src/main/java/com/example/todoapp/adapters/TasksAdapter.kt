@@ -37,12 +37,12 @@ class TasksAdapter(
             tvTaskTitle.text = tasks[position].title
             tvTaskDescription.text = tasks[position].description
             cbCompleted.isChecked = tasks[position].isCompleted
-            cbCompleted.setOnCheckedChangeListener { _, isChecked ->
+            cbCompleted.setOnClickListener {
                 val edited = Task(
                     task.title,
                     task.description,
                     task.date,
-                    isChecked,
+                    !tasks[position].isCompleted,
                     task.isImportant,
                     task.id
                 )

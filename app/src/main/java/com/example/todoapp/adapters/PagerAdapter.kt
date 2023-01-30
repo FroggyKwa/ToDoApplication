@@ -9,14 +9,11 @@ import com.example.todoapp.views.TasksFragment
 
 
 class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    private val fragments = listOf(TasksFragment(), ImportantTasksFragment(), CompletedTasksFragment())
     override fun getItemCount(): Int {
         return 3
     }
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
-            0 -> TasksFragment()
-            1 -> ImportantTasksFragment()
-            else -> CompletedTasksFragment()
+        return fragments[position]
         }
     }
-}
