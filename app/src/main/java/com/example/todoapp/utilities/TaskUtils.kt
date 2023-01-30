@@ -39,7 +39,12 @@ object TaskUtils {
                 }
                 R.id.miSortByDate -> {
                     val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
-                    adapter.tasks = adapter.tasks.sortedBy { task -> LocalDate.parse(task.date, format) }
+                    adapter.tasks = adapter.tasks.sortedByDescending { task ->
+                        LocalDate.parse(
+                            if (task.date != "Date is not chosen") task.date else "01 January 1970",
+                            format
+                        )
+                    }
                     adapter.notifyDataSetChanged()
                     true
                 }
