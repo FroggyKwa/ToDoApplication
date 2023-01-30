@@ -101,7 +101,8 @@ class TasksFragment : Fragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == 7355608) {
                     val data: Intent = result.data ?: return@registerForActivityResult
-                    val task = TaskSerializer.toTaskEntity(data.getSerializableExtra("Task") as TaskSerializer)
+                    val task =
+                        TaskSerializer.toTaskEntity(data.getSerializableExtra("Task") as TaskSerializer)
                     viewModel.update(task)
                 }
 

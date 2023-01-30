@@ -15,6 +15,8 @@ class Repository(
 
     fun getAllTasks() = db.getTasksDao().getAll()
 
+    fun getAllImportant() = db.getTasksDao().getAllImportant()
+
     fun getAllCompletedTasks() = db.getTasksDao().getAllCompleted()
 
     fun getTaskById(id: Int) = db.getTasksDao().get(id)

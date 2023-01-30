@@ -30,4 +30,8 @@ class TasksViewModel(application: Application, private val repository: Repositor
     fun get(id: Int) = repository.getTaskById(id)
 
     fun getAll() = repository.getAllTasks()
+
+    fun getAllImportant() = repository.getAllImportant()
+
+    fun getAllCompleted() = repository.getAllCompletedTasks()
 }
