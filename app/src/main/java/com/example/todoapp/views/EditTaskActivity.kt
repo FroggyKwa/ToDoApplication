@@ -83,6 +83,7 @@ class EditTaskActivity : AppCompatActivity() {
             btnTaskCompleted.setOnClickListener {
                 task.isCompleted = !task.isCompleted
                 val btnCompleted = it as Button
+                btnTaskCompleted.setBackgroundColor(res.getCompletedButtonColor(task.isCompleted))
                 btnCompleted.text = res.getCompletedButtonText(task.isCompleted)
                 viewModel.update(TaskSerializer.toTaskEntity(task))
             }
